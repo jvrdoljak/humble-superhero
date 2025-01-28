@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  InternalServerErrorException,
+  NotFoundException,
+  Post,
+} from '@nestjs/common';
 import { Superhero, SuperheroesService } from './superheroes.service';
 
 @Controller()
@@ -7,11 +15,25 @@ export class SuperheroesController {
 
   @Get('superheroes')
   findAllSuperheroes(): Array<Superhero> {
-    return this.superheroesService.findAllSuperheroes();
+    const superheroes = this.superheroesService.findAllSuperheroes();
+
+    if (superheroes.length == 0) {
+      throw new NotFoundException('Data is not found.');
+    }
+
+    return superheroes;
   }
 
   @Post('superheroes')
   createSuperhero(@Body() superhero: Superhero): string {
-    return this.superheroesService.addSuperhero(superhero);
+    if (superhero.humilityScore > 10 || superhero.humilityScore < 0) {
+      throw new BadRequestException('HumilityScore is out of range 1-10.');
+    }
+
+    if (this.superheroesService.addSuperhero(superhero)) {
+      return 'Superhero is successfully created.';
+    }
+
+    throw new InternalServerErrorException('Something went wrong');
   }
 }

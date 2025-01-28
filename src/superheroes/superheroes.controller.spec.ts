@@ -11,9 +11,7 @@ describe('AppController', () => {
       providers: [SuperheroesService],
     }).compile();
 
-    superheroesController = app.get<SuperheroesController>(
-      SuperheroesController,
-    );
+    superheroesController = app.get<SuperheroesController>(SuperheroesController);
   });
 
   describe('root', () => {
