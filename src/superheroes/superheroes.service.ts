@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from 'fs';
 export interface Superhero {
   name: string;
   superpower: string;
-  humilityScore: 10;
+  humilityScore: number;
 }
 
 const dataFilePath = './superheroes_data/superheroes.json';

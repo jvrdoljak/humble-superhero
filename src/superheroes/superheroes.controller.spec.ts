@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SuperheroesController } from './superheroes.controller';
 import { SuperheroesService } from './superheroes.service';
 
-describe('AppController', () => {
+describe('SuperheroesController', () => {
   let superheroesController: SuperheroesController;
 
   beforeEach(async () => {
@@ -15,8 +15,19 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(superheroesController.findAllSuperheroes()).toBe('Hello World!');
+    it('should return correct data', () => {
+      expect(superheroesController.findAllSuperheroes()).toEqual(
+        expect.objectContaining([{ name: 'John Doe', superpower: 'support', humilityScore: '10' }])
+      );
+    });
+    it('should return correct message', () => {
+      expect(
+        superheroesController.createSuperhero({
+          name: 'Test',
+          superpower: 'Test',
+          humilityScore: 9,
+        })
+      ).toBe('Superhero is successfully created.');
     });
   });
 });

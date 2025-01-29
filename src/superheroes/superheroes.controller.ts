@@ -13,6 +13,10 @@ import { Superhero, SuperheroesService } from './superheroes.service';
 export class SuperheroesController {
   constructor(private readonly superheroesService: SuperheroesService) {}
 
+  /**
+   *
+   * @returns All superheroes in the database
+   */
   @Get('superheroes')
   findAllSuperheroes(): Array<Superhero> {
     const superheroes = this.superheroesService.findAllSuperheroes();
@@ -24,6 +28,11 @@ export class SuperheroesController {
     return superheroes;
   }
 
+  /**
+   *
+   * @param superhero
+   * @returns Creates a new superhero
+   */
   @Post('superheroes')
   createSuperhero(@Body() superhero: Superhero): string {
     if (superhero.humilityScore > 10 || superhero.humilityScore < 0) {
