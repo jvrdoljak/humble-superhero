@@ -14,7 +14,7 @@ http://localhost:4000/
 
 ### Endpoints
 
-<strong>POST /superheroes </strong>: Add a new superhero (name, superpower, and humility score required).<br/> \
+<strong>POST /superheroes </strong>: Add a new superhero (name, superpower, and humilityScore required).<br/> \
 <strong>GET /superheroes</strong>: Fetch the list of superheroes sorted by humility score.
 
 # About NestJS
